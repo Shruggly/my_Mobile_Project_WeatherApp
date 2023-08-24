@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Weather App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-card-header>
+  {{ weatherData.name }} Weather
+</ion-card-header>
+
+<ion-content>
+
+  <ion-button expand="full" routerLink="/details/CityName">Go to Details Page</ion-button>
+  <ion-button expand="full" routerLink="/weather-forecast">Go to Weather Forecast Page</ion-button>
+  <ion-button expand="full" routerLink="/landing">Go to Landing Page</ion-button>
+
+  <ion-item>
+    <ion-label position="floating">Enter City</ion-label>
+    <ion-input [(ngModel)]="city" clearInput></ion-input>
+  </ion-item>
+  
+  <ion-button expand="full" (click)="getWeather()" [disabled]="!city">Get Weather</ion-button>
+
+  <ion-card *ngIf="weatherData">
+    <ion-card-header>
+      {{ weatherData.name }} Weather
+    </ion-card-header>
+    <ion-card-content>
+      Temperature: {{ weatherData.main.temp }}°C<br>
+      Humidity: {{ weatherData.main.humidity }}%
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
