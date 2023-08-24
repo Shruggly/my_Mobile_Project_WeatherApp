@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Plugins } from '@capacitor/core';
 
 const { Http } = Plugins;
@@ -10,14 +11,11 @@ export class WeatherService {
   private apiKey = '4db0f5e47b6d936890fac0b9011d3b47';
   private apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   async getWeather(city: string) {
     const url = `${this.apiUrl}?q=${city}&appid=${this.apiKey}`;
-    return await Http['request']({
-      method: 'GET',
-      url: url,
-    });
+    return this.http.get(url);
+    
   }
 }
-

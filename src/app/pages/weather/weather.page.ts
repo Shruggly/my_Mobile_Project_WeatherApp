@@ -3,6 +3,7 @@ import { WeatherService } from '../../services/weather.service';
 import { NavController } from '@ionic/angular';
 import { DetailsPagePage } from '../../details-page/details-page.page'; // Adjust the path 
 import { ActivatedRoute } from '@angular/router'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-weather',
@@ -19,13 +20,20 @@ export class WeatherPage {
     private route: ActivatedRoute
   ) {}
   
+
+
   async getWeather() {
-    try {
-      const response = await this.weatherService.getWeather(this.city);
-      this.weatherData = response.data;
-    } catch (error) {
-      console.error(error);
-    }
+    (await this.weatherService.getWeather(this.city)).subscribe(
+      (data: any) => {
+        this.weatherData = data;
+        // Handle the data here
+        console.log(data); // Log the data to the console as an example
+      },
+      (error: any) => {
+        // Handle errors here
+        console.error(error); // Log the error to the console as an example
+      }
+    );
   }
 
 

@@ -19,7 +19,7 @@ export class DetailsPagePage implements OnInit {
     this.route.params.subscribe(params => {
       const city = params['city'];
       this.weatherService.getWeather(city).then(response => {
-        this.weatherData = response.data;
+        this.weatherData = response;
       }).catch(error => {
         console.error(error);
       });
